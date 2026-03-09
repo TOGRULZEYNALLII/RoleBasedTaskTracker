@@ -14,10 +14,11 @@ public class Main {
     private static final String Tasks_file = "tasks.txt";
     private static final String Users_file = "users.txt";
     private static final String Progress_file = "progress.txt";
-    static Scanner scanner= new Scanner(System.in);
-        static boolean isRunning = true;
-      static   boolean isAdmin = false;
-       static boolean isMember = false;
+
+    static Scanner scanner = new Scanner(System.in);
+    static boolean isRunning = true;
+    static boolean isAdmin = false;
+    static boolean isMember = false;
     public static void main() throws IOException {
         while (isRunning){
             System.out.println("Welcome to the Task Management System!");
@@ -39,6 +40,7 @@ public class Main {
                     case 1:
                        CreateTask();
                         break;
+
                     case 2:
                         ViewTasks();
                         break;
