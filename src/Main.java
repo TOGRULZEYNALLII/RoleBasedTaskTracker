@@ -9,7 +9,8 @@ import java.util.List;
 import  java.util.Scanner;
 import java.io.File;
 
-public  class Main{
+public class Main {
+
     private static final String Tasks_file = "tasks.txt";
     private static final String Users_file = "users.txt";
     private static final String Progress_file = "progress.txt";
