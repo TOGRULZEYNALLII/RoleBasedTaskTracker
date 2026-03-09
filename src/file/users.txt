@@ -1,2 +1,0 @@
-2528d4a3-d260-4be6-8a30-1944af93fc9b,togrul,1234,admin,
-b715c4f0-1d45-4853-9bf7-6f25a5ee2494,raul,1234,member 
