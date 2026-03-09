@@ -14,12 +14,15 @@ import static Service.AdminService.AssignTask;
 import static Service.AdminService.DeleteMember;
 import static Service.AdminService.ViewTasks;
 import static Service.MemberService.UpdateTaskStatus;
+import static Service.MemberService.ViewTaskMember;
 
 public class CommonService {
+
     static Scanner scanner = new Scanner(System.in);
     static boolean isRunning = true;
     static boolean isAdmin = false;
     static boolean isMember = false;
+    static String currentUser = "";
 
     public  void CommonMain() throws IOException {
         while (isRunning){
@@ -72,26 +75,18 @@ public class CommonService {
         }
         while (isMember){
             System.out.println("Member Menu:");
-            System.out.println("1. View Tasks");
+            System.out.println("1. View Tasks and their status");
             System.out.println("2. Update Task Status");
-            System.out.println("3. View progress: ");
-            System.out.println("4. Logout");
+            System.out.println("3. Logout ");
             int memberChoice = scanner.nextInt();
             switch (memberChoice) {
                 case 1:
-                    ViewTasks();
+                    ViewTaskMember();
                     break;
                 case 2:
-                    UpdateTaskStatus();
+                    UpdateTaskStatus(CommonService.currentUser);
                     break;
                 case 3:
-                    try {
-                        ViewProgress();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    break;
-                case 4:
                     isMember = false;
                     isRunning = true;
                     break;
@@ -113,6 +108,7 @@ public class CommonService {
         String username = scanner.nextLine().trim();
         System.out.print("Password: ");
         String password = scanner.nextLine().trim();
+
         for(String line : lines){
             String[] parts = line.split(",");
             if(parts.length < 4) continue;
@@ -123,6 +119,7 @@ public class CommonService {
             if(fileUsername.equals(username) && filePassword.equals(password)){
                 if(role.equals(Roles.MEMBER.name())){
                     System.out.println("Login successful for Member Welcome, " + username + "!");
+                    currentUser =  parts[0].trim() ;
                     isMember = true;
                     isRunning = false;
                     return;
@@ -138,34 +135,6 @@ public class CommonService {
         System.out.println("Invalid username or password!");
     }
 
-    public static void ViewProgress() throws IOException {
-        File file_progress = new File(AppConstants.FILE_PATH, AppConstants.Progress_file);
-        if (!file_progress.exists()) {
-            System.out.println("No progress found.");
-            return;
-        }
-        List<String> lines = Files.readAllLines(file_progress.toPath());
-        if (lines.isEmpty()) {
-            System.out.println("No progress found.");
-            return;
-        }
-        System.out.println("=== Progress ===");
-        for (String line : lines) {
-            String[] tasks = line.split(",");
-            for (int i = 0; i < tasks.length; i++) {
-                switch (i) {
-                    case 0 -> System.out.println("Task ID: " + tasks[i]);
-                    case 1 -> System.out.println("Title: " + tasks[i]);
-                    case 2 -> System.out.println("Description: " + tasks[i]);
-                    case 3 -> System.out.println("Status: " + tasks[i]);
-                    case 4 -> System.out.println("Assigned to: " + tasks[i].replace("Member id: ",""));
-                    default -> System.out.println(tasks[i]);
-                }
 
-            }
-
-            System.out.println("-------------");
-        }
-    }
 
 }

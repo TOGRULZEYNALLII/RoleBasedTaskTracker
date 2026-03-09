@@ -1,2 +1,1 @@
-fd048208-efc6-4b7f-87cc-94daac067b0e,todo app,todo app yaz reactda,COMPLETED,98721f86-2429-42a9-8792-6ef54d4777a7
 b91cac3c-e5df-47a4-bcc5-6f793bed724b,login page,login and resgiter,COMPLETED,d62d8df4-d286-4d32-bb08-1e8f61c478b8
